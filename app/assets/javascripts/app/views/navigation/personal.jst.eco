@@ -43,9 +43,11 @@
     </li>
   <% else: %>
     <li class="settings<%= if item.class then ' '+ item.class %>">
-      <a class="list-button fit horizontal centered" href="<%= item.target %>" title="<%- @Ti(item.name) %>">
-        <%- @Icon(item.icon, 'user-menu-icon') %>
-      </a>
+      <% if App.Session.get("role_ids").includes(1) || App.Session.get("role_ids").includes(2) || App.Session.get("role_ids").includes(4): %>
+        <a class="list-button fit horizontal centered" href="<%= item.target %>" title="<%- @Ti(item.name) %>">
+            <%- @Icon(item.icon, 'user-menu-icon') %>
+        </a>
+      <% end %>
     </li>
   <% end %>
 <% end %>
