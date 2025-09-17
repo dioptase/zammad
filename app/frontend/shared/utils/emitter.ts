@@ -2,13 +2,14 @@
 
 import mitt, { type Emitter } from 'mitt'
 
-type Events = {
+export type Events = {
   sessionInvalid: void
   'expand-collapsed-content': string
   'focus-quick-search-field': void
   'reset-quick-search-field': void
   'main-sidebar-transition': void
   'close-popover': void
+  'recompute-has-reached-article-bottom': void
 }
 
 const emitter: Emitter<Events> = mitt<Events>()
