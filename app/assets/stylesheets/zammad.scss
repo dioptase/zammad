@@ -648,6 +648,10 @@ pre {
   background: var(--background-secondary);
   border: 1px solid var(--border);
   border-radius: 3px;
+
+  &.no-margin {
+    margin: 0;
+  }
 }
 
 .modal-content pre {
@@ -10372,6 +10376,10 @@ li.dropdown-header {
   &--stretched {
     max-width: none;
   }
+
+  &.no-margin {
+    margin-bottom: 0;
+  }
 }
 
 .setting-controls {
@@ -11932,6 +11940,10 @@ output {
   .settings-list-middle {
     vertical-align: middle;
   }
+
+  &.no-margin {
+    margin: 0;
+  }
 }
 
 .settings-list--roles-permissions {
@@ -12072,6 +12084,28 @@ output {
     }
   }
 
+  &-option-button {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 11px 15px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--supergood-color);
+    }
+
+    &:hover .recipientList-arrow {
+      opacity: 1;
+    }
+  }
+
   &.dropdown li {
     &.has-inactive {
       cursor: unset;
@@ -12111,6 +12145,16 @@ output {
       }
     }
 
+    &.inactive-with-children:hover,
+    &.inactive-with-children.is-active {
+      background: var(--supergood-color);
+
+      .icon-arrow-left,
+      .icon-arrow-right {
+        opacity: 1;
+      }
+    }
+
     &.is-hidden {
       display: none;
     }
@@ -12125,6 +12169,13 @@ output {
       span.searchableSelect-option-arrow {
         padding: 11px 15px;
         cursor: pointer;
+
+        @include bidi-style(border-left, 1px solid rgba(255, 255, 255, 0.13), border-right, none);
+
+        svg {
+          vertical-align: middle;
+          transform: translateY(-1px); // 1px off towards center line height?
+        }
 
         &:hover {
           background: var(--supergood-color);
@@ -13192,14 +13243,14 @@ output {
   }
 
   &-column--selected {
-    flex: 1 1 66%;
+    flex: 1 1 55%;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     padding: 7px;
   }
 
   &-column--sidebar {
-    flex-basis: 33%;
+    flex-basis: 45%;
     flex-shrink: 1;
     border-left: 1px solid var(--border);
     background: var(--background-modifier-accent);

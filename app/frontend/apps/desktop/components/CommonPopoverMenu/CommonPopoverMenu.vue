@@ -56,15 +56,13 @@ const onClickItem = (event: MouseEvent, item: MenuItem) => {
 }
 
 const getHoverFocusStyles = (variant?: Variant) => {
-  if (variant === 'secondary') {
-    return 'hover:bg-blue-500 dark:hover:bg-blue-950'
-  }
+  if (variant === 'secondary')
+    return 'hover:bg-blue-500 active:bg-blue-600 dark:hover:bg-blue-950 dark:active:bg-blue-900'
 
-  if (variant === 'danger') {
-    return 'focus-within:bg-pink-100 hover:bg-pink-100 hover:focus-within:bg-pink-100 dark:focus-within:bg-red-900 dark:hover:bg-red-900 dark:hover:focus-within:bg-red-900'
-  }
+  if (variant === 'danger')
+    return 'hover:bg-pink-100 active:bg-red-400 active:**:text-white! dark:active:bg-red-600! dark:hover:bg-red-900'
 
-  return 'hover:bg-blue-600 dark:hover:bg-blue-900'
+  return 'hover:bg-blue-600 dark:hover:bg-blue-900 active:bg-blue-800! active:**:text-white!'
 }
 </script>
 
@@ -108,6 +106,8 @@ const getHoverFocusStyles = (variant?: Variant) => {
                     :label="subItem.label"
                     :variant="subItem.variant"
                     :link="subItem.link"
+                    :link-external="subItem.linkExternal"
+                    :open-in-new-tab="subItem.openInNewTab"
                     :icon="subItem.icon"
                     :icon-class="subItem.iconClass"
                     :label-placeholder="subItem.labelPlaceholder"
@@ -140,6 +140,8 @@ const getHoverFocusStyles = (variant?: Variant) => {
                   :label="item.label"
                   :variant="item.variant"
                   :link="item.link"
+                  :link-external="item.linkExternal"
+                  :open-in-new-tab="item.openInNewTab"
                   :icon="item.icon"
                   :icon-class="item.iconClass"
                   :label-placeholder="item.labelPlaceholder"

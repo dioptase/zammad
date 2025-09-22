@@ -34,6 +34,7 @@ import type { FormSubmitData, FormValues } from '#shared/components/Form/types.t
 import { useForm } from '#shared/components/Form/useForm.ts'
 import { setErrors } from '#shared/components/Form/utils.ts'
 import { useConfirmation } from '#shared/composables/useConfirmation.ts'
+import { useOnEmitter } from '#shared/composables/useOnEmitter.ts'
 import {
   useTicketMacros,
   macroScreenBehaviourMapping,
@@ -56,6 +57,7 @@ import { EnumFormUpdaterId, EnumTaskbarApp, EnumUserErrorException } from '#shar
 import { convertToGraphQLId } from '#shared/graphql/utils.ts'
 import { QueryHandler } from '#shared/server/apollo/handler/index.ts'
 import { GraphQLErrorTypes, type GraphQLHandlerError } from '#shared/types/error.ts'
+import { waitForAnimationFrame } from '#shared/utils/helpers.ts'
 
 import { useFlyout } from '#desktop/components/CommonFlyout/useFlyout.ts'
 import CommonLoader from '#desktop/components/CommonLoader/CommonLoader.vue'
@@ -532,14 +534,26 @@ const { handleScroll, isHoveringOnTopBar, isHidingTicketDetails, isReachingBotto
 
 const { height } = useWindowSize()
 
+const recalculateIsReachingBottom = async () => {
+  if (!contentContainerElement.value) return // Guard clause happens only in vitest
+
+  await nextTick()
+  await waitForAnimationFrame()
+
+  setTimeout(() => {
+    // On window resize, manually check if the article list is at the bottom.
+    const { clientHeight, scrollHeight, scrollTop } = contentContainerElement.value!
+
+    isReachingBottom.value = scrollTop + clientHeight < scrollHeight
+  }, 200) // Delay waiting for animation frame ~200 transition times
+}
+
 whenever(height, () => {
   if (!contentContainerElement) return
-
-  // On window resize, manually check if the article list is at the bottom.
-  const { clientHeight, scrollHeight, scrollTop } = contentContainerElement.value!
-
-  isReachingBottom.value = scrollTop + clientHeight < scrollHeight
+  recalculateIsReachingBottom()
 })
+
+useOnEmitter('recompute-has-reached-article-bottom', recalculateIsReachingBottom)
 
 const articleListTopPadding = ref('4rem')
 
