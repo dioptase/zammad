@@ -1534,7 +1534,7 @@ ObjectManager::Attribute.add(
   display:     __('Note'),
   data_type:   'richtext',
   data_option: {
-    type:      'text',
+    type:      'richtext',
     maxlength: 5000,
     no_images: true,
     null:      true,
@@ -1920,7 +1920,7 @@ ObjectManager::Attribute.add(
   display:     __('Note'),
   data_type:   'richtext',
   data_option: {
-    type:      'text',
+    type:      'richtext',
     maxlength: 5000,
     no_images: true,
     null:      true,
@@ -2329,7 +2329,7 @@ ObjectManager::Attribute.add(
   display:     __('Note'),
   data_type:   'richtext',
   data_option: {
-    type:      'text',
+    type:      'richtext',
     maxlength: 250,
     no_images: true,
     null:      true,
@@ -2423,7 +2423,7 @@ ObjectManager::Attribute.add(
     null:       false,
     translate:  true,
   },
-  editable:    true,
+  editable:    false,
   active:      true,
   screens:     {
     create: {

@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # core - base
-ruby '3.4.5'
+ruby '3.4.6'
 gem 'rails', '~> 7.2.0'
 gem 'rake'
 
@@ -31,10 +31,8 @@ gem 'thor'
 # core - websocket
 gem 'em-websocket'
 gem 'eventmachine'
-gem 'hiredis'
-# version restriction from actioncable-6.1.6.1/lib/action_cable/subscription_adapter/redis.rb
-#   - check after rails update
-gem 'redis', '>= 3', '< 5'
+gem 'hiredis-client'
+gem 'redis'
 
 # core - password security
 gem 'argon2'
