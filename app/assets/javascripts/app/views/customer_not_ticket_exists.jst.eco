@@ -6,7 +6,7 @@
         <% if @has_any_tickets: %>
           <p><%- @T('You have no tickets to display in this overview.') %></p>
         <% else: %>
-          <% if @is_allowed_to_create_ticket: %>
+          <% if App.Session.get("role_ids").includes(1) || App.Session.get("role_ids").includes(2) || App.Session.get("role_ids").includes(4): %>
             <p><%- @T('You have not created a ticket yet.') %></p>
             <p><%- @T('The way to communicate with us is this thing called "ticket".') %></p>
             <p><%- @T('Please click on the button below to create your first one.') %></p>

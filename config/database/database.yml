@@ -4,24 +4,19 @@
 default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 50
-  encoding: utf8
-
-  ##### postgresql config #####
-
-  adapter: postgresql
+  # pool: 50
+  # encoding: utf8
+  # adapter: postgresql
   # username: zammad
   # password:
 
-  # If the database server is not on localhost, you can set hostname and port:
-  # host:
-  # port:
-
-  #### mysql config #####
-
-  # adapter: mysql2
-  # username: zammad
-  # password: <Password>
+  adapter: postgresql
+  encoding: unicode
+  pool: 10
+  host: 127.0.0.1
+  port: 5432
+  username: zammad
+  password: frite37
 
   # If the database server is not on localhost, you can set hostname and port:
   # host:
@@ -29,7 +24,7 @@ default: &default
 
 production:
   <<: *default
-  database: zammad_production
+  database: zammad_development
 
 development:
   <<: *default
